@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SEOWOO's WEB</title>
+        <title></title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="practice.css">
+        <script src="seouwuscript.js"></script>
+      </head>
+    <body>
+        <div>
+            <div id="title">
+              <h1><a href="index.html">SEOWOO's WEB</a></h1>
+            </div>
+            <div>
+              <input type="button" value="night" onclick="
+              document.querySelector('body').style.backgroundColor = 'black';
+              document.querySelector('body').style.color = 'white';
+            ">
+            <input type="button" value="day" onclick="
+              document.querySelector('body').style.backgroundColor = 'white';
+              document.querySelector('body').style.color = 'black';
+            ">
+           </div>
+            <nav>
+              <ol>
+                <li><a href="index.html">HOME</a></h1></li>
+                <li><a href="2.html">About Me</a></li>
+                <li><a href="3.html">My Hobbies</a></li>
+                <li><a href="1.html">My Pet</a></li>
+                <li><a href="Iog_In.html">Log In</a></li>
+                <li><a href="changecolor.html">Web Cam</a></li>
+              </ol>
+            </nav>
+            <div id="time">
+              <h5><script>document.write("현재 : "+today);</script></h5>
+            </div>
+            <div id="article">
+              <h2>Background change!</h2>
+              <p> SEOWOO의 홈페이지 입니다.<p>
+              웹 캠으로 반응합니다.<p>
+                <div>Teachable Machine Image Model</div>
+        <button type="button" onclick="init()">Start</button>
+        <div style="visibility: hidden; position: absolute; " id="webcam-container"></div>
+        <div id="label-container"></div>
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+        <script type="text/javascript">
+            // More API functions here:
+            // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
+        
+            // the link to your model provided by Teachable Machine export panel
+            const URL = "./my_model/";
+        
+            let model, webcam, labelContainer, maxPredictions;
+        
+            // Load the image model and setup the webcam
+            async function init() {
+                const modelURL = URL + "model.json";
+                const metadataURL = URL + "metadata.json";
+        
+                // load the model and metadata
+                // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
+                // or files from your local hard drive
+                // Note: the pose library adds "tmImage" object to your window (window.tmImage)
+                model = await tmImage.load(modelURL, metadataURL);
+                maxPredictions = model.getTotalClasses();
+        
+                // Convenience function to setup a webcam
+                const flip = true; // whether to flip the webcam
+                webcam = new tmImage.Webcam(200, 200, flip); // width, height, flip
+                await webcam.setup(); // request access to the webcam
+                await webcam.play();
+                window.requestAnimationFrame(loop);
+        
+                // append elements to the DOM
+                document.getElementById("webcam-container").appendChild(webcam.canvas);
+                // labelContainer = document.getElementById("label-container");
+                // for (let i = 0; i < maxPredictions; i++) { // and class labels
+                //     labelContainer.appendChild(document.createElement("div"));
+                // }
+            }
+        
+            async function loop() {
+                webcam.update(); // update the webcam frame
+                await predict();
+                window.requestAnimationFrame(loop);
+            }
+        
+            // run the webcam image through the image model
+            async function predict() {
+                // predict can take in an image, video or canvas html element
+                const prediction = await model.predict(webcam.canvas);
+                console.log(prediction[0].probability);
+                if(prediction[0].probability>0.5){
+                    // console.log('day');
+                    document.querySelector('body').style.backgroundColor='white';
+                    document.querySelector('body').style.color='black';
+    
+                }else{
+                    // console.log('night');
+                    document.querySelector('body').style.backgroundColor='black';
+                    document.querySelector('body').style.color='white';
+                }
+                // for (let i = 0; i < maxPredictions; i++) {
+                //     const classPrediction =
+                //         prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+                //     labelContainer.childNodes[i].innerHTML = classPrediction;
+                // }
+            }
+            init();
+            </script>
+              </p>
+            </div>
+            <footer>
+               문의 메일 : seouwu03@gmail.com <br>
+               문의 전화: 000-0000-0000<br>
+            </footer>
+          </div>
+    </body>
+</html>

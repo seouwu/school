@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+  <title>SEOWOO's WEB: 우리 집 고양이</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="practice.css">
+  <script src="seouwuscript.js"></script>
+</head>
+<body>
+  <div>
+    <div id="title">
+      <h1><a href="index.html">SEOWOO's WEB</a></h1>
+    </div>
+    <div>
+      <input type="button" value="night" onclick="
+      document.querySelector('body').style.backgroundColor = 'black';
+      document.querySelector('body').style.color = 'white';
+    ">
+    <input type="button" value="day" onclick="
+      document.querySelector('body').style.backgroundColor = 'white';
+      document.querySelector('body').style.color = 'black';
+    ">
+   </div>
+    <nav>
+      <ol>
+        <li><a href="index.html">HOME</a></h1></li>
+        <li><a href="2.html">About Me</a></li>
+        <li><a href="3.html">My Hobbies</a></li>
+        <li><a href="1.html">My Pet</a></li>
+        <li><a href="Iog_In.html">Log In</a></li>
+        <li><a href="changecolor.html">Web Cam</a></li>
+      </ol>
+    </nav>
+    <div id="time">
+      <h5><script>document.write("현재 : "+today);</script></h5>
+    </div>
+    <div id="article">
+      <h2>Log In</h2>
+      <form action="input.jsp" method="post">
+        Id : <br>
+        <input type="text" size="" value="" placeholder="hello@email.com"><br>
+        Password : <br>
+        <input type="password" size="" value=""><p></p>
+        <input type="submit" value="LOGIN" ><p></p>
+        <span id="ect">
+          <input type="button" value="아이디 찾기" onclick="alert('준비 중 입니다!')">
+          <input type="button" value="비밀번호 찾기" onclick="alert('준비 중 입니다!')">
+          <input type="button" value="회원가입" onclick="alert('준비 중 입니다!')">
+        </span>
+      </form>
+    </div>
+    <footer>
+      문의 메일 : seouwu03@gmail.com <br>
+      문의 전화: 000-0000-0000<br>
+   </footer>
+  </div>
+</body>
+</html>
